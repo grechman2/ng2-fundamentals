@@ -4,9 +4,7 @@ import { Subject } from 'rxjs/RX'
 @Injectable()
 export class EventService{
     getEvents(){
-        let subject = new Subject();
-        setTimeout(()=>{ subject.next(EVENTS); subject.complete() }, 2000);
-        return subject;
+        return EVENTS;
     }
 
     getEvent(id:number){
