@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "~2.2.0",
     "@angular/router": "~3.2.0",
     "@angular/upgrade": "~2.2.0",
+    "angular2-logger": "^0.5.1",
     "core-js": "~2.4.1",
     "ng2f-bootstrap": "~0.0.4",
     "ng2f-server": "~0.2.3",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "concurrently": "2.2.0",
-    "typescript": "~2.0.3",
+    "typescript": "~2.2.1",
     "@types/core-js": "0.9.36",
     "@types/node": "~6.0.46"
   },
