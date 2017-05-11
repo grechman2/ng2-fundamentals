@@ -26,6 +26,11 @@ export class AuthService{
         return Boolean(this.currentUser);
     }
 
+    updateCurrentUser(firstName:string, lastName:string){
+        this.currentUser.firstName = firstName,
+        this.currentUser.lastName = lastName
+    }
+
     getCurrentUser():IUser{
         return this.currentUser;
     }

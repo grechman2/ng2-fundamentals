@@ -9,7 +9,7 @@ import {
        EventService,
        EventRouteActivator
 } from './events/index'
-import { AuthService } from './user/auth.service'
+import { AuthService } from './user/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
 import { ToastrService } from './common/toastr.service'

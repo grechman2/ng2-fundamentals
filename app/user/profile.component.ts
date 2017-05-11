@@ -1,18 +1,28 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup, NgForm } from '@angular/forms'
+import { AuthService } from './index'
+import { Router } from '@angular/router'
 
 @Component({
-  template: `
-    <h1>Edit Your Profile</h1>
-    <hr>
-    <div class="col-md-6">
-      <h3>[Edit profile form will go here]</h3>
-      <br />
-      <br />
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-default">Cancel</button>
-    </div>
-  `,
+  templateUrl:'app/user/profile.component.html'
 })
-export class ProfileComponent {
-       
+export class ProfileComponent implements OnInit {
+    submitReactiveForm:FormGroup
+    
+    constructor(private authService:AuthService, private router:Router){
+    }
+
+    ngOnInit(): void {
+      let firstName = new FormControl(this.authService.currentUser.firstName);
+      let lastName = new FormControl(this.authService.currentUser.lastName);
+      this.submitReactiveForm = new FormGroup({
+         firstName:firstName,
+         lastName: lastName 
+      });
+    }
+
+     submitProfile(form:NgForm):void{
+        this.authService.updateCurrentUser(form.value.firstName,form.value.lastName);
+        this.router.navigate(['events']);
+     }
 }
