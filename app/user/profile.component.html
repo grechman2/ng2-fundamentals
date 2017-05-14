@@ -2,14 +2,17 @@
   <h1>Edit Your Profile </h1>
   <hr>
   <div class="col-md-4">
-    <form [formGroup]="submitReactiveForm" (ngSubmit)="saveProfile(submitReactiveForm)" autocomplete="off" novalidate>
+    <form [formGroup]="submitReactiveForm" (ngSubmit)="submitProfile(submitReactiveForm)" autocomplete="off" novalidate>
       <div class="form-group">
+        <em *ngIf="!isValidFirstName() && submitReactiveForm.controls.firstName.errors.required">Required</em>
+        <em *ngIf="!isValidFirstName() && submitReactiveForm.controls.firstName.errors.pattern">Must start with a letter</em>
         <label for="firstName">First Name:</label>
         <input id="firstName" 
                type="text" 
                class="form-control" 
                placeholder="First Name..." 
                formControlName="firstName"
+               [ngClass]="{ error: !isValidFirstName() }"
                />
       </div>
       <div class="form-group">
@@ -19,11 +22,12 @@
                class="form-control" 
                placeholder="Last Name..." 
                formControlName="lastName"
+               [ngClass]="{ error: !isValidLastName() }"
                />
       </div>
 
       <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-default">Cancel</button>
+      <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button>
     </form>
   </div>
 </div>

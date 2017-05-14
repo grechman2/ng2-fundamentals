@@ -27,6 +27,7 @@ export class AuthService{
     }
 
     updateCurrentUser(firstName:string, lastName:string){
+        this.logger.warn('Update:'+firstName+"/"+lastName);
         this.currentUser.firstName = firstName,
         this.currentUser.lastName = lastName
     }

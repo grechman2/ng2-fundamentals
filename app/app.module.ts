@@ -16,10 +16,13 @@ import { ToastrService } from './common/toastr.service'
 import { Error404Component } from './errors/404.component'
 import { Logger } from "angular2-logger/core";
 import { appRoutes } from './routes'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(appRoutes)
     ],
     declarations: [EventsAppComponent,
