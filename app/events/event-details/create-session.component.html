@@ -2,18 +2,31 @@
   <h3>Create Session</h3>
 </div>
 <div class="col-md-6">
-  <form autocomplete="off">
+  <form [formGroup]="newSessionForm" (ngSubmit)="saveSession(newSessionForm.value)" autocomplete="off">
     <div class="form-group">
       <label for="sessionName">Session Name:</label>
-      <input id="sessionName" type="text" class="form-control" placeholder="session name..." />
+      <em *ngIf="name.invalid && name.dirty">Required</em>
+      <input id="sessionName"
+            [ngClass]="{'error': name.invalid && name.dirty}" 
+            type="text"
+            formControlName="name"
+            class="form-control" 
+            placeholder="session name..." />
     </div>
     <div class="form-group">
       <label for="eventDate">Presenter:</label>
-      <input id="presenter" type="text" class="form-control" placeholder="presenter..." />
+      <em *ngIf="presenter.invalid && presenter.dirty">Required</em>
+      <input id="presenter" 
+            [ngClass]="{'error': presenter.invalid && presenter.dirty}" 
+            type="text" 
+            formControlName="presenter"
+            class="form-control" 
+            placeholder="presenter..." />
     </div>
     <div class="form-group">
       <label for="duration">Duration:</label>
-      <select class="form-control">
+      <em *ngIf="duration.invalid && duration.dirty">Required</em>
+      <select class="form-control" formControlName="duration"  [ngClass]="{'error': duration.invalid && duration.dirty}" >
         <option value="">select duration...</option>
         <option value="1">Half Hour</option>
         <option value="2">1 Hour</option>
@@ -23,7 +36,8 @@
     </div>
     <div class="form-group">
       <label for="level">Level:</label>
-      <select class="form-control">
+      <em *ngIf="level.invalid && level.dirty">Required</em>
+      <select class="form-control" formControlName="level"  [ngClass]="{'error': level.invalid && level.dirty}" >
         <option value="">select level...</option>
         <option value="Beginner">Beginner</option>
         <option value="Intermediate">Intermediate</option>
@@ -31,10 +45,13 @@
       </select>
     </div>
     <div class="form-group">
+      <em *ngIf="abstract.invalid && abstract.dirty && abstract?.errors.required">Required</em>
+      <em *ngIf="abstract.invalid && abstract.dirty && abstract?.errors.maxLength">Cannot exceed 400 characters</em>
       <label for="abstract">Abstract:</label>
-      <textarea id="abstract" rows=3 class="form-control" placeholder="abstract..."></textarea>
+      <textarea id="abstract" rows=3 class="form-control" placeholder="abstract..." 
+      formControlName="abstract"  [ngClass]="{'error': abstract.invalid && abstract.dirty}" ></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" [disabled]="newSessionForm.invalid" class="btn btn-primary">Save</button>
     <button type="button" class="btn btn-default">Cancel</button>
   </form>
 </div>
