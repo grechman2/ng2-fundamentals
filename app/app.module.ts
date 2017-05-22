@@ -9,12 +9,16 @@ import {
        EventService,
        EventRouteActivator,
        CreateSessionComponent,
-       SessionListComponent
+       SessionListComponent,
+       DurationPipe
 } from './events/index'
 import { AuthService } from './user/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
-import { ToastrService } from './common/toastr.service'
+import { ToastrService,
+         CollapsibleWellComponent 
+        } 
+        from './common/index'
 import { Error404Component } from './errors/404.component'
 import { Logger } from "angular2-logger/core";
 import { appRoutes } from './routes'
@@ -35,7 +39,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
                    Error404Component,
  		           NavBarComponent,
                    CreateSessionComponent,
-                   SessionListComponent ],
+                   SessionListComponent,
+                   CollapsibleWellComponent,
+                   DurationPipe ],
     providers: [ToastrService,
                 EventService,    
                 EventRouteActivator,
