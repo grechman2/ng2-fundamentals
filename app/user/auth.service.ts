@@ -17,12 +17,9 @@ export class AuthService{
             firstName: 'John',
             lastName: 'Papa',
         }
-        this.logger.warn("currentUser:"+this.currentUser);
     }
 
     isAuthenticated(){
-        this.logger.warn('Login auth:'+ !!this.currentUser);
-        this.logger.warn("currentUser:"+this.currentUser);
         return Boolean(this.currentUser);
     }
 

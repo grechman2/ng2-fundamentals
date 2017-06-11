@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core'
+import {Injectable, EventEmitter} from '@angular/core'
 import { Subject } from 'rxjs/RX'
-import { IEvent } from './event.model'
+import { IEvent, ISession } from './event.model'
 
 @Injectable()
 export class EventService{
@@ -22,6 +22,35 @@ export class EventService{
       let index = EVENTS.findIndex(x => x.id === event.id);
       EVENTS[index] = event;
     }
+
+    searchSessions(searchTerm){
+        let results:ISession[] = [];
+        let foundSessions:ISession[] = [];
+        
+        EVENTS.forEach(event => {
+            let foundSessions:ISession[] = [];
+            
+            event.sessions.filter(session =>{
+                 if(session.name.toLocaleLowerCase().indexOf(searchTerm) > -1){
+                    foundSessions.push(session);
+                 }
+             });
+             
+             foundSessions = foundSessions.map(session =>{
+                session.eventId = event.id;
+                return session;
+             })
+             
+             results = results.concat(foundSessions);
+        });
+
+        var emitter = new EventEmitter(true);
+        setTimeout(()=>{
+          console.log("Emit result size:"+results.length);
+          emitter.emit(results);
+        }, 100);
+        return emitter;
+    }
 };
 
  const EVENTS:IEvent[] = [
@@ -40,6 +69,7 @@ export class EventService{
       sessions: [
         {
           id: 1,
+          eventId: 0,
           name: "Using Angular 4 Pipes",
           presenter: "Peter Bacon Darwin",
           duration: 1,
@@ -52,6 +82,7 @@ export class EventService{
         },
         {
           id: 2,
+          eventId: 0,
           name: "Getting the most out of your dev team",
           presenter: "Jeff Cross",
           duration: 1,
@@ -64,6 +95,7 @@ export class EventService{
         },
         {
           id: 3,
+          eventId: 0,
           name: "Angular 4 Performance Metrics",
           presenter: "Rob Wormald",
           duration: 2,
@@ -77,6 +109,7 @@ export class EventService{
         },
         {
           id: 4,
+          eventId: 0,
           name: "Angular 5 Look Ahead",
           presenter: "Brad Green",
           duration: 2,
@@ -91,6 +124,7 @@ export class EventService{
         },
         {
           id: 5,
+          eventId: 0,
           name: "Basics of Angular 4",
           presenter: "John Papa",
           duration: 2,
@@ -118,6 +152,7 @@ export class EventService{
       sessions: [
         {
           id: 1,
+          eventId: 0,
           name: "Testing Angular 4 Workshop",
           presenter: "Pascal Precht & Christoph Bergdorf",
           duration: 4,
@@ -130,6 +165,7 @@ export class EventService{
         },
         {
           id: 2,
+          eventId: 0,
           name: "Angular 4 and Firebase",
           presenter: "David East",
           duration: 3,
@@ -140,6 +176,7 @@ export class EventService{
         },
         {
           id: 3,
+          eventId: 0,
           name: "Reading the Angular 4 Source",
           presenter: "Patrick Stapleton",
           duration: 2,
@@ -151,6 +188,7 @@ export class EventService{
         },
         {
           id: 4,
+          eventId: 0,
           name: "Hail to the Lukas",
           presenter: "Lukas Ruebbelke",
           duration: 1,
@@ -178,6 +216,7 @@ export class EventService{
       sessions: [
         {
           id: 1,
+          eventId: 0,
           name: "How Elm Powers Angular 4",
           presenter: "Murphy Randle",
           duration: 2,
@@ -190,6 +229,7 @@ export class EventService{
         },
         {
           id: 2,
+          eventId: 0,
           name: "Angular and React together",
           presenter: "Jamison Dance",
           duration: 2,
@@ -200,6 +240,7 @@ export class EventService{
         },
         {
           id: 3,
+          eventId: 0,
           name: "Redux Woes",
           presenter: "Rob Wormald",
           duration: 1,
@@ -212,6 +253,7 @@ export class EventService{
         },
         {
           id: 4,
+               eventId: 0,
           name: "ng-wat again!!",
           presenter: "Shai Reznik",
           duration: 1,
@@ -222,6 +264,7 @@ export class EventService{
         },
         {
           id: 5,
+               eventId: 0,
           name: "Dressed for Success",
           presenter: "Ward Bell",
           duration: 2,
@@ -234,6 +277,7 @@ export class EventService{
         },
         {
           id: 6,
+               eventId: 0,
           name: "These aren't the directives you're looking for",
           presenter: "John Papa",
           duration: 2,
@@ -260,6 +304,7 @@ export class EventService{
       sessions: [
         {
           id: 1,
+               eventId: 0,
           name: "Diversity in Tech",
           presenter: "Sir Dave Smith",
           duration: 2,
@@ -272,6 +317,7 @@ export class EventService{
         },
         {
           id: 2,
+               eventId: 0,
           name: "World Peace and Angular",
           presenter: "US Secretary of State Zach Galifianakis",
           duration: 2,
@@ -283,6 +329,7 @@ export class EventService{
         },
         {
           id: 3,
+               eventId: 0,
           name: "Using Angular with Androids",
           presenter: "Dan Wahlin",
           duration: 3,
@@ -309,6 +356,7 @@ export class EventService{
       sessions: [
         {
           id: 1,
+               eventId: 0,
           name: "Gambling with Angular",
           presenter: "John Papa",
           duration: 1,
@@ -322,6 +370,7 @@ export class EventService{
         },
         {
           id: 2,
+               eventId: 0,
           name: "Angular 4 in 60ish Minutes",
           presenter: "Dan Wahlin",
           duration: 2,

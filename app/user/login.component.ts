@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { AuthService } from './auth.service'
 import { Router } from '@angular/router'
-import { Logger } from "angular2-logger/core";
 import { NgForm } from '@angular/forms'
 
 @Component({
@@ -12,10 +11,11 @@ import { NgForm } from '@angular/forms'
 
 })
 export class LoginComponent {
-    constructor(private authService:AuthService, private router:Router, private logger:Logger){
+    constructor(private authService:AuthService, private router:Router){
     }
 
     public onSubmit(form:NgForm){
+        console.log("onSubmit():"+form);
         this.authService.loginUser(form.value.userNameKey, form.value.passwordKey);
         this.router.navigate(['events']);
     }

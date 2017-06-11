@@ -10,13 +10,18 @@ import {
        EventRouteActivator,
        CreateSessionComponent,
        SessionListComponent,
-       DurationPipe
-} from './events/index'
+       DurationPipe,
+       UpvoteComponent
+       } from './events/index'
 import { AuthService } from './user/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
-import { ToastrService,
-         CollapsibleWellComponent 
+import { TOASTR_TOKEN,
+         JQUERY_TOKEN,
+         Toastr,   
+         CollapsibleWellComponent,
+         SimpleModalComponent,
+         ModalTriggerDirective
         } 
         from './common/index'
 import { Error404Component } from './errors/404.component'
@@ -24,6 +29,8 @@ import { Logger } from "angular2-logger/core";
 import { appRoutes } from './routes'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
+declare let toastr:Toastr;
+declare let jQuery:Object;
 @NgModule({
     imports: [
         BrowserModule,
@@ -41,14 +48,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
                    CreateSessionComponent,
                    SessionListComponent,
                    CollapsibleWellComponent,
-                   DurationPipe ],
-    providers: [ToastrService,
+                   SimpleModalComponent,
+                   DurationPipe,
+                   ModalTriggerDirective,
+                   UpvoteComponent ],
+    providers: [
                 EventService,    
                 EventRouteActivator,
                 AuthService,
                 {
                     provide: 'canDeactivateCreateEvent',
                     useValue: checkDirtyState
+                },
+                {
+                    provide: TOASTR_TOKEN,
+                    useValue: toastr
+                },
+                {
+                    provide: JQUERY_TOKEN,
+                    useValue: jQuery   
                 },
                 Logger,
                 ],

@@ -30,6 +30,11 @@ export class SessionListComponent implements OnChanges {
                 })
             }    
     }
+
+    toggleVote(session: ISession){
+        
+    }
+
 }
 
 

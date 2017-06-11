@@ -1,9 +1,8 @@
 <h1>Login</h1>
 <hr>
 <div class="col-md-4">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)" autocomplete="off" novalidate>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off" novalidate>
     <div class="form-group" >
-      <em [hidden]="loginForm." >Required</em>
       <label for="userName">User Name:</label>
       <input (ngModel)="userName" 
       name="userName" 
