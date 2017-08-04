@@ -28,4 +28,6 @@
     <button type="submit" class="btn btn-primary">Login</button>
     <button type="button" (click)="onCancel()" class="btn btn-default">Cancel</button>
   </form>
+  <br>
+  <div *ngIf="loginInvalid" class="alert alert-danger" >Invalid Login Info</div>
 </div>

@@ -11,13 +11,20 @@ import { NgForm } from '@angular/forms'
 
 })
 export class LoginComponent {
+    loginInvalid = false;
     constructor(private authService:AuthService, private router:Router){
     }
 
     public onSubmit(form:NgForm){
-        console.log("onSubmit():"+form);
-        this.authService.loginUser(form.value.userNameKey, form.value.passwordKey);
-        this.router.navigate(['events']);
+        console.log("onSubmit():"+form.value.userName + " " + form.value.password);
+        this.authService.loginUser(form.value.userName, form.value.password)
+            .subscribe( resp => {
+                if(!resp){
+                   this.loginInvalid = true; 
+                }else{
+                    this.router.navigate(['events']);
+                }
+            });
     }
 
     public onCancel(){

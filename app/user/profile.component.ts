@@ -39,8 +39,10 @@ export class ProfileComponent implements OnInit {
     }
 
      submitProfile(form:NgForm):void{
-        this.authService.updateCurrentUser(form.value.firstName,form.value.lastName);
-        this.toastr.info("Profile is saved");
+        this.authService.updateCurrentUser(form.value.firstName,form.value.lastName)
+            .subscribe(() => {
+                this.toastr.info("Profile is saved");
+            });
      }
 
      isValidFirstName():boolean{
@@ -50,4 +52,11 @@ export class ProfileComponent implements OnInit {
      isValidLastName():boolean{
        return (this.lastName.valid || this.lastName.untouched);
      }
+
+    logout(){
+      this.authService.logout().subscribe(() => {
+          console.log("navigating...");
+          this.router.navigate(['/user/login']);
+      });
+    }
 }

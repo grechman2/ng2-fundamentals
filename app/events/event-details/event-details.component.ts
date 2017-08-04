@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { EventService } from '../shared/event.service'
 import { ActivatedRoute, Params } from '@angular/router'
-import { ISession } from '../shared/index';
+import { ISession,IEvent } from '../shared/index';
 
 @Component({
    templateUrl:
@@ -19,14 +19,14 @@ export class EventDetailsComponent{
     sortBy:string = 'votes';
 
     constructor(private eventService: EventService, private route:ActivatedRoute){
-
     }
 
     ngOnInit(){
-        this.route.params.forEach((params: Params) => {
-            this.event = this.eventService.getEvent(+params['id'])
-            this.addMode = false;
+        this.route.data.forEach((data)=>{
+            this.event = data['event'];
         })
+        
+        this.addMode = false;
     }
 
     addSession(){
@@ -37,7 +37,7 @@ export class EventDetailsComponent{
         const biggestId = Math.max.apply(null, this.event.sessions.map(s => s.id));
         session.id = biggestId + 1;
         this.event.sessions.push(session);
-        this.eventService.updateEvent(this.event);
+        this.eventService.saveEvent(this.event).subscribe();
         this.addMode = false;
     }
 

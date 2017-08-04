@@ -15,9 +15,9 @@ import { IEvent } from './index'
                 </div>
                 <div>Price: {{event.price | currency:"USD":true }}</div>
                 <div>
-                    <span>Location: {{event.location.address}}</span>
+                    <span>Location: {{event?.location?.address}}</span>
                     <span class='pad-left'></span>
-                    <span>{{event.location.city}}, {{event.location.country}}</span>
+                    <span>{{event?.location?.city}}, {{event?.location?.country}}</span>
                 </div>
         </div>
     `,

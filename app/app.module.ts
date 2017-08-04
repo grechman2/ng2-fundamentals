@@ -1,18 +1,22 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
+import { HttpModule } from '@angular/http'
 import {
        EventsListComponent,
+       EventListComponentResolver,
        EventThumbnailComponent,
        EventDetailsComponent,
        CreateEventComponent,
        EventService,
-       EventRouteActivator,
+       EventResolver,
        CreateSessionComponent,
        SessionListComponent,
        DurationPipe,
-       UpvoteComponent
+       UpvoteComponent,
+       LocationValidator
        } from './events/index'
+import { VoterService } from './events/event-details/voter.service'
 import { AuthService } from './user/index'
 import { EventsAppComponent } from './events-app.component'
 import { NavBarComponent } from './nav/navbar.component'
@@ -36,6 +40,7 @@ declare let jQuery:Object;
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpModule,
         RouterModule.forRoot(appRoutes)
     ],
     declarations: [EventsAppComponent,
@@ -51,10 +56,12 @@ declare let jQuery:Object;
                    SimpleModalComponent,
                    DurationPipe,
                    ModalTriggerDirective,
-                   UpvoteComponent ],
+                   UpvoteComponent,
+                   LocationValidator ],
     providers: [
-                EventService,    
-                EventRouteActivator,
+                EventService, 
+                EventResolver,
+                EventListComponentResolver,
                 AuthService,
                 {
                     provide: 'canDeactivateCreateEvent',
@@ -69,6 +76,7 @@ declare let jQuery:Object;
                     useValue: jQuery   
                 },
                 Logger,
+                VoterService,
                 ],
     bootstrap: [EventsAppComponent]
 })
